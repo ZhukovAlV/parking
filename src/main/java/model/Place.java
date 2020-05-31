@@ -1,8 +1,17 @@
 package model;
 
 public class Place {
+    Boolean isFreeStatus;
     private int placeNum;
     private TypeCar placeType;
+
+    public Boolean getFreeStatus() {
+        return isFreeStatus;
+    }
+
+    public void setFreeStatus(Boolean freeStatus) {
+        isFreeStatus = freeStatus;
+    }
 
     public int getPlaceNum() {
         return placeNum;
