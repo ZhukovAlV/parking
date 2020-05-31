@@ -1,22 +1,22 @@
 package model;
 
 public class Car {
-	
     private String carNum;
-    private String carType;
+    private TypeCar carType;
     
 	public String getCarNum() {
 		return carNum;
 	}
+
 	public void setCarNum(String carNum) {
 		this.carNum = carNum;
 	}
-	public String getCarType() {
+
+	public TypeCar getCarType() {
 		return carType;
 	}
-	public void setCarType(String carType) {
+
+	public void setCarType(TypeCar carType) {
 		this.carType = carType;
 	}
-  
-    
 }
