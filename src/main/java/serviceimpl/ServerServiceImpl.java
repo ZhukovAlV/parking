@@ -1,17 +1,18 @@
 package serviceimpl;
 
 import exception.ErrorCode;
+import server.Server;
 import server.ServerException;
 import service.ServerService;
 
 public class ServerServiceImpl implements ServerService {
 
     @Override
-    public void startServer(boolean isStarted) throws ServerException{
-        if (!isStarted) throw new ServerException(ErrorCode.SERVER_NOT_START);
+    public void startServer() throws ServerException {
+        if (Server.isIsStarted()) throw new ServerException(ErrorCode.SERVER_IS_START);
     }
     @Override
-    public void stopServer(boolean isStarted) throws ServerException{
-        if (isStarted) throw new ServerException(ErrorCode.SERVER_IS_START);
+    public void stopServer() throws ServerException {
+        if (!Server.isIsStarted()) throw new ServerException(ErrorCode.SERVER_NOT_START);
     }
 }
