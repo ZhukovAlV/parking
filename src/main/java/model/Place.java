@@ -1,9 +1,10 @@
 package model;
 
 public class Place {
-    Boolean isFreeStatus;
+    private Boolean isFreeStatus;
     private int placeNum;
     private TypeCar placeType;
+    private Pay placePay;
 
     public Boolean getFreeStatus() {
         return isFreeStatus;
@@ -27,5 +28,13 @@ public class Place {
 
     public void setPlaceType(TypeCar placeType) {
         this.placeType = placeType;
+    }
+
+    public Pay getPlacePay() {
+        return placePay;
+    }
+
+    public void setPlacePay(Pay placePay) {
+        this.placePay = placePay;
     }
 }
