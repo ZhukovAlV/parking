@@ -2,8 +2,8 @@ package service;
 
 import model.Pay;
 
-import java.util.Date;
+import java.time.LocalTime;
 
 public interface PayService {
-    Pay paySum (Date date);
+    Pay paySum (LocalTime time);
 }
