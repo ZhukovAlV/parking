@@ -1,3 +1,5 @@
+package parking;
+
 import org.junit.Test;
 import server.Server;
 import server.ServerException;
