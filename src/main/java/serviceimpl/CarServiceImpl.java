@@ -13,9 +13,19 @@ public class CarServiceImpl implements CarService {
     public  Map<Place, Car> parkingStart (Map<Place, Car> map, Car car, Pay pay) throws ServerException {
         if (map.containsValue(car)) throw new ServerException(ErrorCode.CAR_IS_PARKING);
         for (Place place : map.keySet()) {
-            if ((place.getPlaceType().equals(TypeCar.PASSENGER) || place.getPlaceType().equals(car.getCarType())) && place.getFreeStatus()) {
+            if (place.getPlaceType().equals(car.getCarType()) && place.getFreeStatus()) {
                 map.replace(place,car);
+                place.setFreeStatus(false);
                 break;
+            }
+        }
+        if (!map.containsValue(car) && car.getCarType().equals(TypeCar.PASSENGER))  {
+            for (Place place : map.keySet()) {
+                if (place.getFreeStatus()) {
+                    map.replace(place,car);
+                    place.setFreeStatus(false);
+                    break;
+                }
             }
         }
         if (!map.containsValue(car)) throw new ServerException(ErrorCode.AREA_HAVE_NOT_PLACE);
@@ -26,12 +36,11 @@ public class CarServiceImpl implements CarService {
     public  Map<Place, Car> parkingEnd (Map<Place, Car> map, Car car) throws ServerException {
         if (!map.containsValue(car)) throw new ServerException(ErrorCode.CAR_IS_NOT_PARKING);
         for (Map.Entry<Place, Car> entry :  map.entrySet()) {
-            if (entry.getValue() != null && entry.getValue().equals(car)) map.replace(entry.getKey(),null);
+            if (entry.getValue() != null && entry.getValue().equals(car)) {
+                entry.getKey().setFreeStatus(true);
+                map.replace(entry.getKey(),null);
+            }
         }
-/*        Iterator<Map.Entry<Place, Car>> entryIterator = map.entrySet().iterator();
-        while (entryIterator.hasNext()) {
-            if (entryIterator.next().getValue().equals(car)) entryIterator.next().getKey();
-        }*/
         if (map.containsValue(car)) throw new ServerException(ErrorCode.CAR_PARKING_END_ERROR);
         return map;
     }
