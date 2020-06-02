@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AreaPark {
-    Map<Car,Place> places = new HashMap<>();
+    Map<Place, Car> places = new HashMap<>();
 
-    public Map<Car, Place> getPlaces() {
+    public Map<Place, Car> getPlaces() {
         return places;
     }
 
-    public void setPlaces(Map<Car, Place> places) {
+    public void setPlaces(Map<Place, Car> places) {
         this.places = places;
     }
 }

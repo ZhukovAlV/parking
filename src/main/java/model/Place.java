@@ -1,17 +1,20 @@
 package model;
 
 public class Place {
-    private Boolean isFreeStatus;
     private int placeNum;
     private TypeCar placeType;
-    private Pay placePay;
+    private Boolean isFreeStatus;
 
-    public Boolean getFreeStatus() {
-        return isFreeStatus;
+    public Place(int placeNum, TypeCar placeType) {
+        this.placeNum = placeNum;
+        this.placeType = placeType;
+        this.isFreeStatus = true;
     }
 
-    public void setFreeStatus(Boolean freeStatus) {
-        isFreeStatus = freeStatus;
+    public Place(int placeNum, TypeCar placeType, Boolean isFreeStatus) {
+        this.placeNum = placeNum;
+        this.placeType = placeType;
+        this.isFreeStatus = isFreeStatus;
     }
 
     public int getPlaceNum() {
@@ -22,19 +25,19 @@ public class Place {
         this.placeNum = placeNum;
     }
 
+    public Boolean getFreeStatus() {
+        return isFreeStatus;
+    }
+
+    public void setFreeStatus(Boolean freeStatus) {
+        isFreeStatus = freeStatus;
+    }
+
     public TypeCar getPlaceType() {
         return placeType;
     }
 
     public void setPlaceType(TypeCar placeType) {
         this.placeType = placeType;
-    }
-
-    public Pay getPlacePay() {
-        return placePay;
-    }
-
-    public void setPlacePay(Pay placePay) {
-        this.placePay = placePay;
     }
 }
