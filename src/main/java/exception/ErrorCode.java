@@ -5,6 +5,7 @@ public enum ErrorCode {
     SERVER_NOT_START("{\"error\" : \"Сервер не запущен.\"}"),
     CAR_IS_PARKING("{\"error\" : \"Машина уже припаркована.\"}"),
     CAR_IS_NOT_PARKING("{\"error\" : \"Машина не была припаркована.\"}"),
+    CAR_PARKING_END_ERROR("{\"error\" : \"Машина не смогла освободить место на парковке.\"}"),
     AREA_HAVE_NOT_PLACE("{\"error\" : \"Все места заняты.\"}");
 
     private String message;

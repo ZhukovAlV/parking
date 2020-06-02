@@ -5,32 +5,34 @@ import model.*;
 import server.ServerException;
 import service.CarService;
 
-import java.util.Iterator;
 import java.util.Map;
 
 public class CarServiceImpl implements CarService {
 
     @Override
-    public AreaPark parkingStart(AreaPark park, Car car, Pay pay) throws ServerException {
-        if (park.getPlaces().containsKey(car)) throw new ServerException(ErrorCode.CAR_IS_PARKING);
-
-/*        for (Map.Entry<Place, Car> entry : park.getPlaces().entrySet()) {
-            if ((entry.getValue().getPlaceType().equals(TypeCar.PASSENGER) || entry.getValue().getPlaceType().equals(car.getCarType())) && entry.getValue().getFreeStatus())
-                entry.getValue().setPlacePay(pay);
-                park.getPlaces().put(car,entry.getValue());
-        }*/
-
-        if (park.getPlaces().containsKey(car)) throw new ServerException(ErrorCode.AREA_HAVE_NOT_PLACE);
-        return park;
+    public  Map<Place, Car> parkingStart (Map<Place, Car> map, Car car, Pay pay) throws ServerException {
+        if (map.containsValue(car)) throw new ServerException(ErrorCode.CAR_IS_PARKING);
+        for (Place place : map.keySet()) {
+            if ((place.getPlaceType().equals(TypeCar.PASSENGER) || place.getPlaceType().equals(car.getCarType())) && place.getFreeStatus()) {
+                map.replace(place,car);
+                break;
+            }
+        }
+        if (!map.containsValue(car)) throw new ServerException(ErrorCode.AREA_HAVE_NOT_PLACE);
+        return map;
     }
 
     @Override
-    public AreaPark parkingEnd(AreaPark park, Car car) throws ServerException {
-        if (!park.getPlaces().containsKey(car)) throw new ServerException(ErrorCode.CAR_IS_NOT_PARKING);
-        Iterator<Map.Entry<Place, Car>> entryIterator = park.getPlaces().entrySet().iterator();
-        while (entryIterator.hasNext()) {
-            entryIterator.remove();
+    public  Map<Place, Car> parkingEnd (Map<Place, Car> map, Car car) throws ServerException {
+        if (!map.containsValue(car)) throw new ServerException(ErrorCode.CAR_IS_NOT_PARKING);
+        for (Map.Entry<Place, Car> entry :  map.entrySet()) {
+            if (entry.getValue() != null && entry.getValue().equals(car)) map.replace(entry.getKey(),null);
         }
-        return park;
+/*        Iterator<Map.Entry<Place, Car>> entryIterator = map.entrySet().iterator();
+        while (entryIterator.hasNext()) {
+            if (entryIterator.next().getValue().equals(car)) entryIterator.next().getKey();
+        }*/
+        if (map.containsValue(car)) throw new ServerException(ErrorCode.CAR_PARKING_END_ERROR);
+        return map;
     }
 }

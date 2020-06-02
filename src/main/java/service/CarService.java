@@ -1,11 +1,13 @@
 package service;
 
-import model.AreaPark;
 import model.Car;
 import model.Pay;
+import model.Place;
 import server.ServerException;
 
+import java.util.Map;
+
 public interface CarService {
-    AreaPark parkingStart (AreaPark park, Car car, Pay pay) throws ServerException;
-    AreaPark parkingEnd (AreaPark park, Car car) throws ServerException;
+    Map<Place, Car> parkingStart (Map<Place, Car> map, Car car, Pay pay) throws ServerException;
+    Map<Place, Car> parkingEnd (Map<Place, Car> map, Car car) throws ServerException;
 }
