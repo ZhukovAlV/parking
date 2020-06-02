@@ -1,20 +1,12 @@
 package parking;
 
-import model.Car;
 import model.Pay;
-import model.Place;
-import model.TypeCar;
 import org.junit.Assert;
 import org.junit.Test;
-import server.ServerException;
-import service.CarService;
 import service.PayService;
-import serviceimpl.CarServiceImpl;
 import serviceimpl.PayServiceImpl;
 
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TestPay {
 
