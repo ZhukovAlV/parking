@@ -10,7 +10,7 @@ import java.util.Map;
 public class CarServiceImpl implements CarService {
 
     @Override
-    public  Map<Place, Car> parkingStart (Map<Place, Car> map, Car car, Pay pay) throws ServerException {
+    public  Map<Place, Car> parkingStart (Map<Place, Car> map, Car car) throws ServerException {
         if (map.containsValue(car)) throw new ServerException(ErrorCode.CAR_IS_PARKING);
         for (Place place : map.keySet()) {
             if (place.getPlaceType().equals(car.getCarType()) && place.getFreeStatus()) {
